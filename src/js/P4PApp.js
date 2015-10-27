@@ -2,6 +2,10 @@
  * Created by Nidin Vinayakan on 26-10-2015.
  */
 var ctx, textImg;
+var invert = {
+    "Indian":"Pakistani",
+    "Pakistani":"Indian"
+};
 function startApp() {
     if (!ctx) {
         var canvas = document.getElementById("image-canvas");
@@ -45,17 +49,24 @@ function displayImage(img) {
     drawText();
 }
 function drawText(){
-    var y = 175;
+    var y = 205;
 
-    ctx.fillStyle = "rgba(255,244,175,0.8)";
-    ctx.fillRect(0, y-20, 256, 256  + 20 - y);
+    if(!citizen){
+        ctx.fillStyle = "rgba(255,244,175,0.8)";
+        ctx.fillRect(0, y-20, 256, 256  + 20 - y);
 
-    ctx.fillStyle = "#000000";
-    ctx.font = "italic 1em Ubuntu";
-    ctx.fillText("I'm an Indian", 5, y);
-    ctx.fillText("I'm from Kochi", 5, y + 15);
-    ctx.fillText("I don't hate Pakistan", 5, y + 30);
-    ctx.fillText("I'm not alone", 5, y + 45);
-    ctx.fillText("There are many people", 5, y + 60);
-    ctx.fillText("Like me.", 5, y + 75);
+        ctx.fillStyle = "#000000";
+        ctx.font = "italic 1em Ubuntu";
+        ctx.fillText("Please wait...", 5, y);
+    }else{
+        ctx.fillStyle = "rgba(255,244,175,0.8)";
+        ctx.fillRect(0, y-20, 256, 256  + 20 - y);
+
+        ctx.fillStyle = "#000000";
+        ctx.font = "italic 1em Ubuntu";
+        ctx.fillText("I'm an "+citizen, 5, y);
+        ctx.fillText("I don't hate "+invert[citizen], 5, y + 15);
+        ctx.fillText("I'm not alone", 5, y + 30);
+        ctx.fillText("There are many people like me", 5, y + 45);
+    }
 }

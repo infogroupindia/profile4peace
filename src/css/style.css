@@ -38,12 +38,19 @@ body {
 
 .slogan {
     width: 100%;
+    line-height: 20%;
     display: inline-block;
     font-size: 4em;
     text-align: center;
     color: #7FB4E8;
     text-shadow: 0 -1px #222222;
 }
+@media only screen and (max-width: 480px) {
+    div[class="slogan"] {
+        font-size: 2em; !important;
+    }
+}
+
 #image-canvas{
     position: absolute;
 }
@@ -101,4 +108,19 @@ body {
     right: 0;
     font-size: 0.7em;
     color: #527aa4;
+}
+.privacy{
+    position: absolute;
+    width: 328px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    font-size: 1em;
+    color: #527aa4;
+}
+.privacy-title{
+    font-size: 2em;
+}
+.privacy-text{
+    font-size: 1em;
 }

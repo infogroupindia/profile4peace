@@ -2,31 +2,35 @@
  * Created by Nidin Vinayakan on 26-10-2015.
  */
 // This is called with the results from from FB.getLoginStatus().
+var scopes = {
+    scope:"user_photos,user_hometown"
+};
+var citizen = null;
 function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-
     var loginBtn = document.getElementById('peaceBtn');
 
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
         fetchProfilePic();
+        fetchUserCountry();
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('peaceBtn').innerHTML = 'Login with FB';
         loginBtn.onclick = function(){
-            FB.login();
+            FB.login(function(response){
+                console.log(response);
+            },scopes);
         }
     } else {
         // The person is not logged into Facebook, so we're not sure if
         // they are logged into this app or not.
         loginBtn.innerHTML = 'Login with FB';
         loginBtn.onclick = function(){
-            FB.login();
+            FB.login(function(response){
+                console.log(response);
+            },scopes);
         }
     }
 }
@@ -37,7 +41,7 @@ function statusChangeCallback(response) {
 function checkLoginState() {
     FB.getLoginStatus(function(response) {
         statusChangeCallback(response);
-    });
+    },scopes);
 }
 
 window.fbAsyncInit = function() {
@@ -49,21 +53,9 @@ window.fbAsyncInit = function() {
         version    : 'v2.5' // use version 2.2
     });
 
-    // Now that we've initialized the JavaScript SDK, we call
-    // FB.getLoginStatus().  This function gets the state of the
-    // person visiting this page and can return one of three states to
-    // the callback you provide.  They can be:
-    //
-    // 1. Logged into your app ('connected')
-    // 2. Logged into Facebook, but not your app ('not_authorized')
-    // 3. Not logged into Facebook and can't tell if they are logged into
-    //    your app or not.
-    //
-    // These three cases are handled in the callback function.
-
     FB.getLoginStatus(function(response) {
         statusChangeCallback(response);
-    });
+    },scopes);
 
 };
 
@@ -76,17 +68,7 @@ window.fbAsyncInit = function() {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-// Here we run a very simple test of the Graph API after login is
-// successful.  See statusChangeCallback() for when this call is made.
-function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-        console.log('Successful login for: ' + response.name);
-        document.getElementById('status').innerHTML =
-            'Thanks for logging in, ' + response.name + '!';
-    });
-}
-function fetchProfilePic(){
+function fetchProfilePic(callback){
     FB.api(
         "/me/picture?width=512&height=512",
         function (response) {
@@ -96,8 +78,21 @@ function fetchProfilePic(){
                 img.src = response.data.url;
                 img.onload = function(){
                     displayImage(img);
+                    if(callback){
+                        callback(img);
+                    }
                 }
             }
         }
     );
+}
+function fetchUserCountry(){
+    FB.api('/me?fields=hometown', function(response) {
+        console.log(response);
+        if(response.hometown.name.indexOf("India") > -1){
+            citizen = "Indian";
+        }else if(response.hometown.name.indexOf("Pakistan") > -1){
+            citizen = "Pakistani";
+        }
+    });
 }
