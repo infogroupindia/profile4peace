@@ -26,7 +26,10 @@ SECRET_KEY = 'oi(@6)(t(7$cse@z^#vrl394e&_!&wnbd#@xjadkxa)^dzxp+q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '.facebook.com',
+    '.profile4peace.in'
+]
 
 
 # Application definition
