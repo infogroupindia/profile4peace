@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>Profile 4 Peace</title>
-    <script src="js/fb.js"></script>
-    <script type="text/javascript" src="./js/P4PApp.js"></script>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./fonts/audimat/audimat-regular.css">
-    <!--<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:700' rel='stylesheet' type='text/css'>-->
+    {% load staticfiles %}
+    <script src="{% static "js/fb.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/P4PApp.js" %}"></script>
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="{% static "fonts/audimat/audimat-regular.css" %}">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu:500italic' rel='stylesheet' type='text/css'>
     <script>
         window.onload = function(){

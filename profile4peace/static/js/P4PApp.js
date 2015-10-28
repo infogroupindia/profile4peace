@@ -58,7 +58,7 @@ function drawText() {
 
         ctx.fillStyle = "#000000";
         ctx.font = "italic 1em Ubuntu";
-        ctx.fillText("Please wait...", 5, y);
+        ctx.fillText("Please wait...", 85, y+25);
 
     } else {
 
