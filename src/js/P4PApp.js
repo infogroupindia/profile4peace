@@ -3,8 +3,8 @@
  */
 var ctx, textImg;
 var invert = {
-    "Indian":"Pakistani",
-    "Pakistani":"Indian"
+    "Indian":"Pakistanis",
+    "Pakistani":"Indians"
 };
 function startApp() {
     if (!ctx) {
