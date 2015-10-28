@@ -3,8 +3,8 @@
  */
 var ctx, textImg;
 var invert = {
-    "Indian":"Pakistanis",
-    "Pakistani":"Indians"
+    "Indian": "Pakistanis",
+    "Pakistani": "Indians"
 };
 function startApp() {
     if (!ctx) {
@@ -48,25 +48,29 @@ function displayImage(img) {
     ctx.drawImage(img, 0, 0, 256, 256);
     drawText();
 }
-function drawText(){
+function drawText() {
     var y = 205;
 
-    if(!citizen){
+    if (!citizen) {
+
         ctx.fillStyle = "rgba(255,244,175,0.8)";
-        ctx.fillRect(0, y-20, 256, 256  + 20 - y);
+        ctx.fillRect(0, y - 20, 256, 256 + 20 - y);
 
         ctx.fillStyle = "#000000";
         ctx.font = "italic 1em Ubuntu";
         ctx.fillText("Please wait...", 5, y);
-    }else{
+
+    } else {
+
         ctx.fillStyle = "rgba(255,244,175,0.8)";
-        ctx.fillRect(0, y-20, 256, 256  + 20 - y);
+        ctx.fillRect(0, y - 20, 256, 256 + 20 - y);
 
         ctx.fillStyle = "#000000";
         ctx.font = "italic 1em Ubuntu";
-        ctx.fillText("I'm an "+citizen, 5, y);
-        ctx.fillText("I don't hate "+invert[citizen], 5, y + 15);
+        ctx.fillText("I'm an " + citizen, 5, y);
+        ctx.fillText("I don't hate " + invert[citizen], 5, y + 15);
         ctx.fillText("I'm not alone", 5, y + 30);
         ctx.fillText("There are many people like me", 5, y + 45);
+
     }
 }
