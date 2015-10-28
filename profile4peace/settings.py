@@ -31,7 +31,7 @@ ALLOWED_HOSTS = [
     '.profile4peace.in'
 ]
 
-X_FRAME_OPTIONS = 'ALLOW-FROM apps.facebook.com'
+#X_FRAME_OPTIONS = 'ALLOW-FROM apps.facebook.com'
 
 # Application definition
 
