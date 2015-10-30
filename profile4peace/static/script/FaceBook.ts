@@ -90,7 +90,7 @@ class FaceBook {
                 if (response && !response.error) {
                     var img = new Image();
                     img.src = response.data.url;
-                    img.onload = () => {
+                    img.onload = function() {
                         if (callback) {
                             callback(img);
                         }
