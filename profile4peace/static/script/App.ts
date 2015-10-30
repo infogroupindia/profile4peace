@@ -5,17 +5,26 @@ class App{
     callLater:boolean;
     user:any;
     img:any;
+    loginBtn:any;
     invert = {
         "Indian": "Pakistanis",
         "Pakistani": "Indians"
     };
 
     constructor(){
-
+        this.loginBtn = document.getElementById('peaceBtn');
         FaceBook.api = new FaceBook(this.onInit);
     }
+
     onInit(){
+
         console.log("App Inited");
+
+        this.loginBtn.innerHTML = "Make Peace";
+        this.loginBtn.onclick = () => {
+            FaceBook.api.uploadPhoto(this.ctx.getImageData(0,0,256,256));
+        };
+
         FaceBook.api.fetchProfilePic((img) => {this.onImageReady(img)});
         FaceBook.api.fetchUserInfo((user) => {this.onUserInfoReady(user)});
     }

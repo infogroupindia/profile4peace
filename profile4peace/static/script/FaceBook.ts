@@ -7,8 +7,9 @@ class FaceBook {
 
     static api:FaceBook;
 
+    accessToken:string;
     scopes:any = {
-        scope: "user_photos,user_hometown"
+        scope: "user_photos,user_hometown,publish_actions"
     };
 
     user = {
@@ -61,6 +62,7 @@ class FaceBook {
 
         if (response.status === 'connected') {
             // Logged into your app and Facebook.
+            this.accessToken = response.authResponse.accessToken;
             this.oninit();
         } else if (response.status === 'not_authorized') {
             // The person is logged into Facebook, but not your app.
@@ -114,6 +116,12 @@ class FaceBook {
                 callback(this.user);
             }
         });
+    }
+
+    uploadPhoto(data){
+        window.FB.api('me/photos', 'post', data, (response) => {
+            console.log(response);
+        })
     }
 }
 

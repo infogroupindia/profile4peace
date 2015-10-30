@@ -5,11 +5,16 @@ var App = (function () {
             "Indian": "Pakistanis",
             "Pakistani": "Indians"
         };
+        this.loginBtn = document.getElementById('peaceBtn');
         FaceBook.api = new FaceBook(this.onInit);
     }
     App.prototype.onInit = function () {
         var _this = this;
         console.log("App Inited");
+        this.loginBtn.innerHTML = "Make Peace";
+        this.loginBtn.onclick = function () {
+            FaceBook.api.uploadPhoto(_this.ctx.getImageData(0, 0, 256, 256));
+        };
         FaceBook.api.fetchProfilePic(function (img) {
             _this.onImageReady(img);
         });

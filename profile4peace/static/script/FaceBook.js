@@ -3,7 +3,7 @@ var FaceBook = (function () {
         var _this = this;
         this.oninit = oninit;
         this.scopes = {
-            scope: "user_photos,user_hometown"
+            scope: "user_photos,user_hometown,publish_actions"
         };
         this.user = {
             fbId: null,
@@ -51,6 +51,7 @@ var FaceBook = (function () {
         var loginBtn = document.getElementById('peaceBtn');
         if (response.status === 'connected') {
             // Logged into your app and Facebook.
+            this.accessToken = response.authResponse.accessToken;
             this.oninit();
         }
         else if (response.status === 'not_authorized') {
@@ -102,6 +103,11 @@ var FaceBook = (function () {
             if (callback) {
                 callback(_this.user);
             }
+        });
+    };
+    FaceBook.prototype.uploadPhoto = function (data) {
+        window.FB.api('me/photos', 'post', data, function (response) {
+            console.log(response);
         });
     };
     return FaceBook;
