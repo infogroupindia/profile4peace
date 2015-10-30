@@ -43,13 +43,13 @@ class FaceBook {
             version: 'v2.5' // use version 2.2
         });
 
-        window.FB.getLoginStatus(function (response) {
+        window.FB.getLoginStatus((response) => {
             this.statusChangeCallback(response);
         }, this.scopes);
     }
 
     checkLoginState() {
-        window.FB.getLoginStatus(function (response) {
+        window.FB.getLoginStatus((response) => {
             this.statusChangeCallback(response);
         }, this.scopes);
     }
@@ -65,8 +65,8 @@ class FaceBook {
         } else if (response.status === 'not_authorized') {
             // The person is logged into Facebook, but not your app.
             document.getElementById('peaceBtn').innerHTML = 'Login with FB';
-            loginBtn.onclick = function () {
-                window.FB.login(function (response) {
+            loginBtn.onclick = () => {
+                window.FB.login((response) => {
                     console.log(response);
                 }, this.scopes);
             }
@@ -74,8 +74,8 @@ class FaceBook {
             // The person is not logged into Facebook, so we're not sure if
             // they are logged into this app or not.
             loginBtn.innerHTML = 'Login with FB';
-            loginBtn.onclick = function () {
-                window.FB.login(function (response) {
+            loginBtn.onclick = () => {
+                window.FB.login((response) => {
                     console.log(response);
                 }, this.scopes);
             }
@@ -90,7 +90,7 @@ class FaceBook {
                 if (response && !response.error) {
                     var img = new Image();
                     img.src = response.data.url;
-                    img.onload = function () {
+                    img.onload = () => {
                         if (callback) {
                             callback(img);
                         }
@@ -101,7 +101,7 @@ class FaceBook {
     }
 
     fetchUserInfo(callback) {
-        window.FB.api('/me?fields=hometown,name', function (response) {
+        window.FB.api('/me?fields=hometown,name', (response) => {
             console.log(response);
             this.user.fbId = response.id;
             this.user.name = response.name;

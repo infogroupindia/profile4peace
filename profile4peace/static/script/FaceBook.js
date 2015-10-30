@@ -26,6 +26,7 @@ var FaceBook = (function () {
         }(document, 'script', 'facebook-jssdk'));
     }
     FaceBook.prototype.init = function () {
+        var _this = this;
         window.FB.init({
             appId: '1658469721067231',
             cookie: true,
@@ -34,15 +35,17 @@ var FaceBook = (function () {
             version: 'v2.5' // use version 2.2
         });
         window.FB.getLoginStatus(function (response) {
-            this.statusChangeCallback(response);
+            _this.statusChangeCallback(response);
         }, this.scopes);
     };
     FaceBook.prototype.checkLoginState = function () {
+        var _this = this;
         window.FB.getLoginStatus(function (response) {
-            this.statusChangeCallback(response);
+            _this.statusChangeCallback(response);
         }, this.scopes);
     };
     FaceBook.prototype.statusChangeCallback = function (response) {
+        var _this = this;
         console.log('statusChangeCallback');
         console.log(response);
         var loginBtn = document.getElementById('peaceBtn');
@@ -56,7 +59,7 @@ var FaceBook = (function () {
             loginBtn.onclick = function () {
                 window.FB.login(function (response) {
                     console.log(response);
-                }, this.scopes);
+                }, _this.scopes);
             };
         }
         else {
@@ -66,7 +69,7 @@ var FaceBook = (function () {
             loginBtn.onclick = function () {
                 window.FB.login(function (response) {
                     console.log(response);
-                }, this.scopes);
+                }, _this.scopes);
             };
         }
     };
@@ -85,18 +88,19 @@ var FaceBook = (function () {
         });
     };
     FaceBook.prototype.fetchUserInfo = function (callback) {
+        var _this = this;
         window.FB.api('/me?fields=hometown,name', function (response) {
             console.log(response);
-            this.user.fbId = response.id;
-            this.user.name = response.name;
+            _this.user.fbId = response.id;
+            _this.user.name = response.name;
             if (response.hometown.name.indexOf("India") > -1) {
-                this.user.citizen = "Indian";
+                _this.user.citizen = "Indian";
             }
             else if (response.hometown.name.indexOf("Pakistan") > -1) {
-                this.user.citizen = "Pakistani";
+                _this.user.citizen = "Pakistani";
             }
             if (callback) {
-                callback(this.user);
+                callback(_this.user);
             }
         });
     };
