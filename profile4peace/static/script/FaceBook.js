@@ -10,7 +10,10 @@ var FaceBook = (function () {
             name: null,
             citizen: null
         };
-        window.fbAsyncInit = function () { return _this.init; };
+        window.fbAsyncInit = function () {
+            console.log("SDK Inited");
+            _this.init();
+        };
         // Load the SDK asynchronously
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];

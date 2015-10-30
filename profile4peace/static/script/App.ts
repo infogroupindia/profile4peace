@@ -13,6 +13,7 @@ class App{
         FaceBook.api = new FaceBook(this.onInit);
     }
     onInit(){
+        console.log("App Inited");
         FaceBook.api.fetchProfilePic(this.onImageReady);
         FaceBook.api.fetchUserInfo(this.onUserInfoReady);
     }

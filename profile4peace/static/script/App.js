@@ -8,6 +8,7 @@ var App = (function () {
         FaceBook.api = new FaceBook(this.onInit);
     }
     App.prototype.onInit = function () {
+        console.log("App Inited");
         FaceBook.api.fetchProfilePic(this.onImageReady);
         FaceBook.api.fetchUserInfo(this.onUserInfoReady);
     };

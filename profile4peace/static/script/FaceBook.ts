@@ -14,11 +14,15 @@ class FaceBook {
     user = {
         fbId: null,
         name: null,
-        citizen:null
+        citizen: null
     };
 
     constructor(private oninit) {
-        window.fbAsyncInit = () => this.init;
+
+        window.fbAsyncInit = () => {
+            console.log("SDK Inited");
+            this.init();
+        };
         // Load the SDK asynchronously
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -43,11 +47,13 @@ class FaceBook {
             this.statusChangeCallback(response);
         }, this.scopes);
     }
+
     checkLoginState() {
         window.FB.getLoginStatus(function (response) {
             this.statusChangeCallback(response);
         }, this.scopes);
     }
+
     statusChangeCallback(response) {
         console.log('statusChangeCallback');
         console.log(response);
@@ -75,6 +81,7 @@ class FaceBook {
             }
         }
     }
+
     fetchProfilePic(callback) {
         window.FB.api(
             "/me/picture?width=512&height=512",
@@ -92,6 +99,7 @@ class FaceBook {
             }
         );
     }
+
     fetchUserInfo(callback) {
         window.FB.api('/me?fields=hometown,name', function (response) {
             console.log(response);
