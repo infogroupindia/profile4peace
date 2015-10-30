@@ -8,9 +8,14 @@ var App = (function () {
         FaceBook.api = new FaceBook(this.onInit);
     }
     App.prototype.onInit = function () {
+        var _this = this;
         console.log("App Inited");
-        FaceBook.api.fetchProfilePic(this.onImageReady);
-        FaceBook.api.fetchUserInfo(this.onUserInfoReady);
+        FaceBook.api.fetchProfilePic(function (img) {
+            _this.onImageReady(img);
+        });
+        FaceBook.api.fetchUserInfo(function (user) {
+            _this.onUserInfoReady(user);
+        });
     };
     App.prototype.startApp = function () {
         if (!this.ctx) {
@@ -21,8 +26,21 @@ var App = (function () {
         }
     };
     App.prototype.onImageReady = function (img) {
+        this.img = img;
+        this.displayImage(img);
+        if (this.callLater) {
+            this.drawText();
+            this.callLater = false;
+        }
     };
     App.prototype.onUserInfoReady = function (user) {
+        this.user = user;
+        if (!this.img) {
+            this.callLater = true;
+        }
+        else {
+            this.drawText();
+        }
     };
     App.prototype.displayImage = function (img) {
         if (!this.ctx) {

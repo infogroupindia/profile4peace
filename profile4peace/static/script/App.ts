@@ -2,7 +2,9 @@
 class App{
 
     ctx:CanvasRenderingContext2D;
+    callLater:boolean;
     user:any;
+    img:any;
     invert = {
         "Indian": "Pakistanis",
         "Pakistani": "Indians"
@@ -14,8 +16,8 @@ class App{
     }
     onInit(){
         console.log("App Inited");
-        FaceBook.api.fetchProfilePic(this.onImageReady);
-        FaceBook.api.fetchUserInfo(this.onUserInfoReady);
+        FaceBook.api.fetchProfilePic((img) => {this.onImageReady(img)});
+        FaceBook.api.fetchUserInfo((user) => {this.onUserInfoReady(user)});
     }
     startApp() {
         if (!this.ctx) {
@@ -27,10 +29,20 @@ class App{
         }
     }
     onImageReady(img){
-
+        this.img = img;
+        this.displayImage(img);
+        if(this.callLater){
+            this.drawText();
+            this.callLater = false;
+        }
     }
     onUserInfoReady(user){
-
+        this.user = user;
+        if(!this.img){
+            this.callLater = true;
+        }else{
+            this.drawText();
+        }
     }
     displayImage(img) {
         if (!this.ctx) {
