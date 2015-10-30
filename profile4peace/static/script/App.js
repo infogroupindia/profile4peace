@@ -1,12 +1,15 @@
 ///<reference path="FaceBook.ts" />
 var App = (function () {
     function App() {
+        var _this = this;
         this.invert = {
             "Indian": "Pakistanis",
             "Pakistani": "Indians"
         };
         this.loginBtn = document.getElementById('peaceBtn');
-        FaceBook.api = new FaceBook(this.onInit);
+        FaceBook.api = new FaceBook(function () {
+            _this.onInit();
+        });
     }
     App.prototype.onInit = function () {
         var _this = this;

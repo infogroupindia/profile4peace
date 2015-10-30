@@ -13,7 +13,9 @@ class App{
 
     constructor(){
         this.loginBtn = document.getElementById('peaceBtn');
-        FaceBook.api = new FaceBook(this.onInit);
+        FaceBook.api = new FaceBook(() => {
+            this.onInit();
+        });
     }
 
     onInit(){
